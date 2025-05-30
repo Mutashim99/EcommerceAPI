@@ -14,7 +14,7 @@ namespace EcommerceAPI.Models
 
 
         public int UserId { get; set; } // link to  User(foreign Key) that this user has written this review
-        public User user { get; set; } // Navigation property for User
+        public User User { get; set; } // Navigation property for User
 
 
         public int ProductId { get; set; } // Link to Product that this product has this review
