@@ -27,10 +27,11 @@ namespace EcommerceAPI.Models
         public Category Category { get; set; }
 
         public List<OrderItem>? OrderItems { get; set; } // to connect OrderItems table and Products table like many users can order the same product so 1 product can have many OrderItems
-        // isko aese smjho ke 1 order mein multiple orderitems ho skte to har item koi na koi product he
-        public List<CartItem>? CartItems { get; set; }
+        // isko aese smjho ke 1 order mein multiple orderitems ho skte to har item koi na koi product he aur product multiple orderitems mein aa skta
+        //ye admin panel ke lye useful he because of admin panel mein koi bhi product aur us product ki order history le skte ek saath useful for analytics
+        public List<CartItem>? CartItems { get; set; } // to connect OrderItems table and Products table like many users can add the same product to card so 1 product can have many CartItems
+        //useful for checking how many peoples have added a particular item to their cart for analytics
 
-
-
+        public List<FavoriteItem>? FavoriteItems { get; set; }
     }
 }

@@ -13,6 +13,9 @@ namespace EcommerceAPI.Models
         [Required] 
         [EmailAddress]
         public string Email { get; set; }
+        [Phone]
+        [Required]
+        public string? PhoneNumber { get; set; }
         [Required]
         public string PasswordHash { get; set; } //will be implemented through BCrypt
         public string Role { get; set; } = "Customer"; //Default is Customer when a user is created
@@ -21,5 +24,8 @@ namespace EcommerceAPI.Models
         public List<CartItem>? CartItems { get; set; } // 1 user can have multiple cartitems
         public List<Address>? Addresses { get; set; } // 1 user can have multiple Address (Permanent/Home/Office)
         public List<Review>? Reviews { get; set; }  // 1 user can have multiple Reviews
+
+        public List<FavoriteItem>? FavoriteProducts { get; set; } // 1 user can have many favorite items
+
     }
 }
