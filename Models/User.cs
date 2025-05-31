@@ -13,9 +13,12 @@ namespace EcommerceAPI.Models
         [Required] 
         [EmailAddress]
         public string Email { get; set; }
+        [Required]
+        public bool IsEmailVerified { get; set; } = false; 
+        public string? EmailVerificationToken { get; set; } // this will be generated using the method in service class and will be called in signup controller to generate and store a token in DB
         [Phone]
         [Required]
-        public string? PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         [Required]
         public string PasswordHash { get; set; } //will be implemented through BCrypt
         public string Role { get; set; } = "Customer"; //Default is Customer when a user is created
