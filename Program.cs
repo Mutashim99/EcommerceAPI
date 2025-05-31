@@ -1,6 +1,10 @@
 using EcommerceAPI.Data;
+using EcommerceAPI.Mappings;
+using EcommerceAPI.Services.Auth;
+using EcommerceAPI.Services.Email;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,8 +33,9 @@ builder.Services.AddAuthentication("Bearer")
     });
 
 builder.Services.AddAuthorization();
-
-
+builder.Services.AddScoped<IAuth,AuthService>();
+builder.Services.AddScoped<IEmail, EmailService>();
+builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
 
