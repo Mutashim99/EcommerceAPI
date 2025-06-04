@@ -48,7 +48,7 @@ namespace EcommerceAPI.Services.Auth
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
             );
-
+            
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
@@ -72,13 +72,14 @@ namespace EcommerceAPI.Services.Auth
             db.Users.Add( RealUser );
             await db.SaveChangesAsync();
 
-            var VerificationURL = $"http://localhost:3000/api/auth/verify-token/{RealUser.EmailVerificationToken}";
+            var VerificationUrl = $"{_config["FrontendDomainForEmailVerification"]}/verify-token/{RealUser.EmailVerificationToken}";
+
             //generate the verification url and send it via calling the sendemail method in emailservice
             var subject = "EMAIL VERIFICATION LINK";
             var body = $@"
                     <h1>Thank you for signing up!</h1>
                     <h2>You can verify your email using 
-                        <a href='{VerificationURL}' target='_blank'>this link</a>.
+                        <a href='{VerificationUrl}' target='_blank'>this link</a>.
                     </h2>";
 
             var emailsendresult = await sendemail.SendEmailAsync(RealUser.Email, subject, body);
@@ -86,7 +87,7 @@ namespace EcommerceAPI.Services.Auth
                 return new ServiceResponse<string>
                 {
                     Success = false,
-                    Message = "Email wasnt send succefully",
+                    Message = "There was an error sending you verification Email, try again later or with another email",
                     Data = null
                 };
             }
@@ -133,6 +134,15 @@ namespace EcommerceAPI.Services.Auth
                     Message = "Wrong credentials"
                 };
             }
+            if (!CurrentUser.IsEmailVerified)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Success = false,
+                    Message = "Please verify your email before logging in."
+                };
+            }
             var token = CreateToken(CurrentUser);
 
             return new ServiceResponse<string>
@@ -177,9 +187,11 @@ namespace EcommerceAPI.Services.Auth
                         Success = true,
                     }; 
             }
+            
+
 
             tokenOwner.IsEmailVerified = true;
-            tokenOwner.EmailVerificationToken = null; // Optional: remove token after use
+            tokenOwner.EmailVerificationToken = null; 
 
             await db.SaveChangesAsync();
 
