@@ -10,12 +10,10 @@ namespace EcommerceAPI.Models
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
-        public int Stock { get; set; }
+       
         [Required]
         public string ImageURL { get; set; } // 1 Image url for now, can add another model if we want to add multiple images and can link these two models like 1 product can have multiple images so Product key on images side
-        [Required]
-        public decimal Price { get; set; }
+        
         public string? Brand { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Date and time when the prodcut was created
         public bool IsActive { get; set; } = true; // Instead of Deleting a product mark it Inactive to display only active products
@@ -33,5 +31,7 @@ namespace EcommerceAPI.Models
         //useful for checking how many peoples have added a particular item to their cart for analytics
 
         public List<FavoriteItem>? FavoriteItems { get; set; }
+
+        public List<ProductVariant>? Variants { get; set; }
     }
 }

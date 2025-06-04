@@ -18,13 +18,14 @@ namespace EcommerceAPI.Data
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<FavoriteItem> FavoriteItems { get; set; }
-
+        public DbSet<ProductVariant> ProductVariants { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Define decimal precision explicitly
-            modelBuilder.Entity<Product>()
-                .Property(p => p.Price)
+
+            modelBuilder.Entity<ProductVariant>()
+                .Property(o => o.Price)
                 .HasPrecision(18, 2);
 
             modelBuilder.Entity<OrderItem>()
