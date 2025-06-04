@@ -8,8 +8,12 @@ namespace EcommerceAPI.Mappings
     {
         public AutoMapperProfile()
         {
-            CreateMap<UserRegistrationDTO, User>();
+            CreateMap<UserRegistrationDTO, User>()
+    .ForMember(dest => dest.PasswordHash, opt => opt.Ignore());
+
             CreateMap<User, UserRegistrationDTO>(); 
+
+            CreateMap<UserLoginDTO, UserLoginDTO>();
         }
     }
 }

@@ -3,8 +3,10 @@ using BCrypt.Net;
 using EcommerceAPI.Data;
 using EcommerceAPI.DTOs;
 using EcommerceAPI.Models;
+using EcommerceAPI.Services.Email;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Crypto.Generators;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -16,11 +18,14 @@ namespace EcommerceAPI.Services.Auth
         private readonly IConfiguration _config;
         private readonly AppDbContext db;
         private readonly IMapper mapper;
-        public AuthService(IConfiguration _config , AppDbContext db , IMapper mapper)
+        private readonly IEmail sendemail;
+
+        public AuthService(IConfiguration _config , AppDbContext db , IMapper mapper , IEmail sendemail)
         {
             this._config = _config;
             this.db = db;
             this.mapper = mapper;
+            this.sendemail = sendemail;
         }
         public string CreateToken(User user)
         {
@@ -67,7 +72,24 @@ namespace EcommerceAPI.Services.Auth
             db.Users.Add( RealUser );
             await db.SaveChangesAsync();
 
+            var VerificationURL = $"http://localhost:3000/api/auth/verify-token/{RealUser.EmailVerificationToken}";
             //generate the verification url and send it via calling the sendemail method in emailservice
+            var subject = "EMAIL VERIFICATION LINK";
+            var body = $@"
+                    <h1>Thank you for signing up!</h1>
+                    <h2>You can verify your email using 
+                        <a href='{VerificationURL}' target='_blank'>this link</a>.
+                    </h2>";
+
+            var emailsendresult = await sendemail.SendEmailAsync(RealUser.Email, subject, body);
+            if (emailsendresult == false) {
+                return new ServiceResponse<string>
+                {
+                    Success = false,
+                    Message = "Email wasnt send succefully",
+                    Data = null
+                };
+            }
 
             return new ServiceResponse<string>
             {
@@ -76,22 +98,98 @@ namespace EcommerceAPI.Services.Auth
                 Data = null
             };
 
+        }
+
+
+        public async Task<ServiceResponse<string>> LoginAsync(UserLoginDTO user)
+        {
+            if (user == null)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Success = false,
+                    Message = "Enter all the information first"
+                };
+            }
 
             
+            var CurrentUser = await db.Users.FirstOrDefaultAsync(x => x.Email == user.Email);
+            if (CurrentUser == null)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Success = false,
+                    Message = "User not found"
+                };
+            }
+            if (CurrentUser.Email != user.Email || !BCrypt.Net.BCrypt.Verify(user.Password, CurrentUser.PasswordHash))
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Success = false,
+                    Message = "Wrong credentials"
+                };
+            }
+            var token = CreateToken(CurrentUser);
 
+            return new ServiceResponse<string>
+            {
+                Data = token,
+                Success = true,
+                Message = "Succesfully logged In!"
+            };
         }
 
 
-        public Task<ServiceResponse<string>> LoginAsync(UserLoginDTO user)
+
+        public async Task<ServiceResponse<string>> VerifyEmailAsync(string token)
         {
-            throw new NotImplementedException();
-        }
+            if (string.IsNullOrEmpty(token))
+            {
+                return new ServiceResponse<string>
+                {
+                    Message = "Invalid verification token.",
+                    Data = null,
+                    Success = false,
+                };
+            }
+              var tokenOwner = await db.Users.FirstOrDefaultAsync(x => x.EmailVerificationToken == token);
 
-       
+            if (tokenOwner == null)
+            {
+                    return new ServiceResponse<string>
+                    {
+                        Message = "Invalid or expired verification token.",
+                        Data = null,
+                        Success = false,
+                    }; 
+            }
 
-        public Task<bool> VerifyEmailAsync(string token)
-        {
-            throw new NotImplementedException();
-        }
+            if (tokenOwner.IsEmailVerified)
+            {
+                    return new ServiceResponse<string>
+                    {
+                        Message = "Email is already verified.",
+                        Data = null,
+                        Success = true,
+                    }; 
+            }
+
+            tokenOwner.IsEmailVerified = true;
+            tokenOwner.EmailVerificationToken = null; // Optional: remove token after use
+
+            await db.SaveChangesAsync();
+
+                return new ServiceResponse<string>
+                {
+                    Message = "Email verified Succesfully.",
+                    Data = null,
+                    Success = true
+                };
+            }
+
     }
 }

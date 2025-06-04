@@ -173,3 +173,10 @@ F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\refint\EcommerceAPI.dll
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\EcommerceAPI.pdb
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\EcommerceAPI.genruntimeconfig.cache
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\ref\EcommerceAPI.dll
+F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\AutoMapper.dll
+F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\MailKit.dll
+F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\MimeKit.dll
+F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
