@@ -14,6 +14,8 @@ namespace EcommerceAPI.Mappings
             CreateMap<User, UserRegistrationDTO>(); 
 
             CreateMap<UserLoginDTO, UserLoginDTO>();
+
+            CreateMap<User,UserProfileDTO>();
         }
     }
 }
