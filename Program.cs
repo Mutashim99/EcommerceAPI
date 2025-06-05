@@ -1,4 +1,7 @@
-using EcommerceAPI.Data;
+global using EcommerceAPI.DTOs;
+global using EcommerceAPI.Data;
+global using EcommerceAPI.Controllers;
+global using EcommerceAPI.Services;
 using EcommerceAPI.Mappings;
 using EcommerceAPI.Services.Auth;
 using EcommerceAPI.Services.Email;
@@ -6,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 

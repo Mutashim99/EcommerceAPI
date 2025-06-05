@@ -25,4 +25,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\UserManagement\UserFavoriteManagement\" />
+    <Folder Include="Services\UserManagement\UserReviewManagement\" />
+    <Folder Include="Services\UserManagement\UserOrderManagement\" />
+    <Folder Include="Services\UserManagement\UserAddressManagement\" />
+  </ItemGroup>
+
 </Project>
