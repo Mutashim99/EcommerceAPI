@@ -1,0 +1,32 @@
+# Ignore sensitive configuration
+appsettings.json
+appsettings.Development.json
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore build results
+bin/
+obj/
+out/
+
+# Ignore logs
+*.log
+
+# Ignore Visual Studio temporary files
+.vs/
+
+# Ignore Rider IDE files
+.idea/
+
+# Ignore secrets.json if used
+secrets.json
+
+# Ignore node_modules if using frontend
+node_modules/
+
+# Optional: Ignore database files
+*.db

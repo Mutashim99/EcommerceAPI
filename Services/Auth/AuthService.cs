@@ -63,14 +63,10 @@ namespace EcommerceAPI.Services.Auth
                     Data = null
                 };
             }
-
             var RealUser = mapper.Map<User>(user);
 
             RealUser.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.Password);
             RealUser.EmailVerificationToken = Guid.NewGuid().ToString();
-
-            db.Users.Add( RealUser );
-            await db.SaveChangesAsync();
 
             var VerificationUrl = $"{_config["FrontendDomainForEmailVerification"]}/verify-token/{RealUser.EmailVerificationToken}";
 
@@ -91,6 +87,9 @@ namespace EcommerceAPI.Services.Auth
                     Data = null
                 };
             }
+
+            db.Users.Add(RealUser);
+            await db.SaveChangesAsync();
 
             return new ServiceResponse<string>
             {

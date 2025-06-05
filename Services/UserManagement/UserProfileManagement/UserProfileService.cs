@@ -2,6 +2,7 @@
 using AutoMapper;
 using EcommerceAPI.DTOs;
 using EcommerceAPI.Models;
+using EcommerceAPI.Services.Email;
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
@@ -10,12 +11,15 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
     {
         private readonly AppDbContext db;
         private readonly IMapper mapper;
+        private readonly IConfiguration _config;
+        private readonly IEmail sendemail;
 
-
-        public UserProfileService(AppDbContext db, IMapper mapper)
+        public UserProfileService(AppDbContext db, IMapper mapper , IConfiguration config, IEmail email)
         {
             this.db = db;
             this.mapper = mapper;
+            _config = config;
+            this.sendemail = email;
         }
 
         public async Task<ServiceResponse<UserProfileDTO>> GetUserProfileAsync(int Id)
@@ -48,7 +52,7 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
             var CurrentUser = await db.Users.FirstOrDefaultAsync(x => x.Id == Id);
             if( CurrentUser != null) { 
                 CurrentUser.Username = newName;
-
+                await db.SaveChangesAsync();
                 var userProfileDTO = mapper.Map<UserProfileDTO>(CurrentUser);
 
                 return new ServiceResponse<UserProfileDTO>
@@ -72,7 +76,7 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
             if (CurrentUser != null)
             {
                 CurrentUser.PhoneNumber = newPhoneNumber;
-
+                await db.SaveChangesAsync();
                 var userProfileDTO = mapper.Map<UserProfileDTO>(CurrentUser);
 
                 return new ServiceResponse<UserProfileDTO>
@@ -116,7 +120,7 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
 
             var newHashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
             CurrentUser.PasswordHash = newHashedPassword;
-
+            await db.SaveChangesAsync();
 
 
             return new ServiceResponse<string>
@@ -127,22 +131,92 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
             };
         }
 
-        public Task<ServiceResponse<string>> ForgotPasswordAsync(string email)
+        public async Task<ServiceResponse<string>> ForgotPasswordAsync(string email)
         {
-            throw new NotImplementedException();
+            if(email == null)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Message = "please provide an email",
+                    Success = false
+                };
+
+            }
+            var CurrentUser = await db.Users.FirstOrDefaultAsync(x => x.Email == email);
+            if (CurrentUser == null)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Message = "Can not find any user with this email",
+                    Success = false
+                };
+            }
+            var Resettoken = Guid.NewGuid().ToString();
+            CurrentUser.ResetPasswordToken = Resettoken;
+            CurrentUser.ResetPasswordTokenExpiry = DateTime.UtcNow.AddMinutes(30);
+            await db.SaveChangesAsync();
+
+            var Passresetlink = $"{_config["FrontendDomainForEmailVerification"]}/reset-password/{CurrentUser.ResetPasswordToken}";
+
+            var subject = "Password Reset Link";
+            var body = $@"
+                    <h1>HOW DUMB YOU ARE TO FORGET YOUR PASSWORD!</h1>
+                    <h2>anyways here is your link to reset your password! 
+                        <a href='{Passresetlink}' target='_blank'>this link</a>.
+                    </h2>";
+            var SendEmailResult = await sendemail.SendEmailAsync(CurrentUser.Email, subject, body);
+            if (!SendEmailResult)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Message = "Can not send you an email right now! try again later",
+                    Success = false
+                };
+            }
+            return new ServiceResponse<string>
+            {
+                Data = null,
+                Message = "Password Reset Link Sent Succesfully",
+                Success = true
+            };
         }
 
-        public Task<ServiceResponse<string>> ResetPasswordAsync(string token, string newpassword)
+        public async Task<ServiceResponse<string>> ResetPasswordAsync(string token, string newpassword)
         {
-            throw new NotImplementedException();
+            var Currentuser = await db.Users.FirstOrDefaultAsync(u => u.ResetPasswordToken == token);
+
+            if (Currentuser == null || Currentuser.ResetPasswordTokenExpiry < DateTime.UtcNow)
+            {
+                return new ServiceResponse<string>
+                {
+                    Success = false,
+                    Message = "Invalid or expired password reset token.",
+                    Data = null
+                };
+            }
+
+            var newHashedPassword = BCrypt.Net.BCrypt.HashPassword(newpassword);
+            Currentuser.PasswordHash = newHashedPassword;
+            await db.SaveChangesAsync();
+
+
+            return new ServiceResponse<string>
+            {
+                Data = null,
+                Message = "Password Updated Succesfully",
+                Success = true
+            };
         }
 
- 
 
-        
 
-       
 
-      
+
+
+
+
     }
 }

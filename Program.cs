@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+using EcommerceAPI.Services.UserManagement.UserProfileManagement;
 
 
 
@@ -40,6 +41,7 @@ builder.Services.AddAuthentication("Bearer")
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuth,AuthService>();
 builder.Services.AddScoped<IEmail, EmailService>();
+builder.Services.AddScoped<IUserProfile,UserProfileService>();
 builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 

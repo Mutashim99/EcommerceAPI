@@ -166,7 +166,6 @@ F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\staticwebassets\msbuild.build.Ecom
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.EcommerceAPI.props
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.EcommerceAPI.props
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\staticwebassets.pack.json
-F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\Ecommerc.C58B2BB1.Up2Date
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\EcommerceAPI.dll
 F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\refint\EcommerceAPI.dll
@@ -180,3 +179,4 @@ F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\MailKit.dll
 F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\MimeKit.dll
 F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
 F:\EcommerceAPI\EcommerceAPI\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+F:\EcommerceAPI\EcommerceAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
