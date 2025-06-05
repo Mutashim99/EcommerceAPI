@@ -50,22 +50,8 @@ A complete, eCommerce backend built with **ASP.NET Core Web API** and **Entity F
 - **JWT** for Authentication
 - **MailKit** for Email Services
 - **Swagger** for API testing
-- **AutoMapper** (optional)
-- **FluentValidation** (optional)
-
----
-
-## 🏗️ Project Structure
-EcommerceAPI/
-│
-├── Controllers/
-├── Services/
-├── Models/
-├── Data/ # DbContext & Migrations
-├── DTOs/ # (if used)
-├── Helpers/ # Email, JWT generation, etc.
-├── Program.cs
-└── appsettings.json
+- **AutoMapper** 
+- **FluentValidation**
 
 ---
 
@@ -109,12 +95,6 @@ dotnet ef database update
 ```bash
 dotnet run
 ```
-
-
----
-
-- You can replace `5000`/`5001` with your actual ports if you've changed them. Let me know if you'd like me to regenerate the full README with this included.
-
 
 ### 🤝 Contributing
 - Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
