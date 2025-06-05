@@ -1,94 +1,100 @@
+# 🛒 ASP.NET Core eCommerce Backend API
 
-# 🛍️ ASP.NET Core E-Commerce Backend - Project Features Summary
-
-**Date:** 2025-05-29
-
----
-
-## ✅ Core Project Setup
-- [x] ASP.NET Core Web API created from scratch
-- [x] No repository pattern (services used directly)
-- [x] Clean architecture with Models, Controllers, and Services
+A complete, eCommerce backend built with **ASP.NET Core Web API** and **Entity Framework Core**, supporting all essential operations of a modern eCommerce platform.
 
 ---
 
-## 🧍 User Management
-- [x] `User` model with:
-  - Username, Email, PasswordHash, Role
-  - PhoneNumber (optional)
-  - EmailVerificationToken, IsEmailVerified
-  - OTPCode, OTPExpiration (optional)
-- [x] Password hashing with **BCrypt**
-- [x] Role-based authentication with JWT (Admin, Customer)
+## 🚀 Features
+
+### 👤 User Management
+- JWT Authentication & Authorization
+- Role-based access (Admin, Customer)
+- Register, Login, Profile Update
+- Password Change & Forgot/Reset Password (via Email)
+- Soft Delete / Deactivate Account
+
+### 🛍️ Product Management
+- CRUD for Products
+- Product Variants (Size, Color, Price, Stock)
+- Product Categories
+- Product Reviews
+- Product Images (coming soon)
+
+### 📦 Order & Cart
+- Add to Cart
+- Update & Remove Cart Items
+- Place Orders from Cart
+- Track Orders
+- Order History for Users
+- Admin View of All Orders
+
+### 💖 Wishlist / Favorites
+- Add or Remove Products from Wishlist
+
+### 📧 Email Services
+- Send verification, reset password, and notification emails
+
+### 🛠 Admin Features
+- View all users
+- Assign roles
+- Manage product catalog
+- View all orders
 
 ---
 
-## 🔐 Authentication & Verification
-- [x] JWT-based Authentication (Login + Register)
-- [x] Email Verification System
-  - Generate token
-  - Send verification link
-  - Block login if not verified
-- [x] Phone Verification System (via SMS)
-  - Generate and send OTP
-  - Verify OTP
-  - Mark phone as verified
+## 🧰 Tech Stack
+
+- **.NET 8** (ASP.NET Core Web API)
+- **Entity Framework Core**
+- **SQL Server**
+- **JWT** for Authentication
+- **MailKit** for Email Services
+- **Swagger** for API testing
+- **AutoMapper** 
+- **FluentValidation**
 
 ---
 
-## 📦 E-Commerce Models & Features
+## ⚙️ Getting Started
 
-### ✅ Product & Catalog
-- `Product`
-- `Category`
-- `ProductImage`
-- `Review`
+### 1. Clone the repository
+```bash
+git clone https://github.com/Mutashim99/EcommerceAPI.git
+cd ecommerce-api
+```
+### 2. Configure your DB and Email
+- Update appsettings.json:
+```bash
+"ConnectionStrings": {
+  "DefaultConnection": "Your SQL Server connection string"
+},
+"Jwt": {
+  "Key": "Your_Secret_Key",
+  "Issuer": "your-app",
+  "Audience: "your audience"
+},
+"EmailSettings": {
+  "SmtpServer": "smtp.yourdomain.com",
+  "Port": 587,
+  "SenderEmail": "your-email@domain.com",
+  "SenderName" : "Your Name",
+  "Password": "your-email-password"
+}
+```
 
-### ✅ Orders
-- `Order`
-- `OrderItem`
-- `Address`
+### 3. Run Migrations & Database Update
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
 
-### ✅ Cart
-- `CartItem` (linked to User & Product)
+### 4. Run the API
 
-### ✅ Users
-- `User` with roles and relationships
+- Run the application using the .NET CLI:
 
----
+```bash
+dotnet run
+```
 
-## 🛒 Checkout Flow
-- [x] Cart → Order placement
-- [x] Cash on Delivery / JazzCash / EasyPaisa / Bank Transfer options
-- [x] Orders placed with status = `OnHold` until manual confirmation
-
----
-
-## 💸 Payment System
-- ❌ No payment gateway (Stripe not available)
-- ✅ Manual payment handling via bank/EasyPaisa/JazzCash
-- ✅ No `Payment` model needed — payment method and status tracked in `Order`
-
----
-
-## 🛠️ Admin Panel (Planned Support)
-- Admin user can:
-  - [ ] View all orders
-  - [ ] Update order status (Pending → Shipped → Delivered)
-  - [ ] Add/update/delete products
-  - [ ] Manage users
-  - [ ] View product reviews
-
----
-
-## ✉️ Notification System
-- ✅ Email sending (via MailKit/SMTP)
-- ✅ SMS sending (via SendPK or similar)
-
----
-
-## 🧠 Smart Design Choices
-- Using `List<>` instead of `ICollection<>` in models (allowed)
-- Avoiding redundant models (like `Payment`)
-- Email + phone verification to prevent fake users
-- Keeping things extensible but practical
+### 🤝 Contributing
+- Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
