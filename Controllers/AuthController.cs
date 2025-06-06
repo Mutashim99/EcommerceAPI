@@ -1,4 +1,4 @@
-﻿using EcommerceAPI.DTOs;
+﻿using EcommerceAPI.DTOs.AuthDTOs;
 using EcommerceAPI.Services.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +16,7 @@ namespace EcommerceAPI.Controllers
             this.auth = auth;
         }
 
-        [HttpPost("/signup")]
+        [HttpPost("Signup")]
         public async Task<ActionResult> SignUp(UserRegistrationDTO registerdto)
         {
             if (!ModelState.IsValid)
@@ -30,7 +30,7 @@ namespace EcommerceAPI.Controllers
             return BadRequest(RegisterAsyncResult.Message);
         }
 
-        [HttpPost("/login")]
+        [HttpPost("Login")]
         public async Task<ActionResult<string>> Login(UserLoginDTO logindto)
         {
             if (!ModelState.IsValid)
@@ -47,10 +47,10 @@ namespace EcommerceAPI.Controllers
             return BadRequest(LoginResponse.Message);
 
         }
-        [HttpGet("/verify-email")]
-        public async Task<ActionResult> VerifyEmail([FromQuery] string token)
+        [HttpPost("VerifyEmail")]
+        public async Task<ActionResult> VerifyEmail(VerifyEmailDTO verifyEmailDTO)
         {
-            var verifymethodcall = await auth.VerifyEmailAsync(token);
+            var verifymethodcall = await auth.VerifyEmailAsync(verifyEmailDTO.Token);
            if(verifymethodcall.Success == true)
                 return Ok(verifymethodcall.Message);
 

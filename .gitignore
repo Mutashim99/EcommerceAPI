@@ -10,6 +10,7 @@ appsettings.Development.json
 
 # Ignore build results
 bin/
+bin/debug
 obj/
 out/
 

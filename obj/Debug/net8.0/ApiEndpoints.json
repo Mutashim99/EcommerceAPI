@@ -2,14 +2,14 @@
   {
     "ContainingType": "EcommerceAPI.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "login",
+    "RelativePath": "api/Auth/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "logindto",
-        "Type": "EcommerceAPI.DTOs.UserLoginDTO",
+        "Type": "EcommerceAPI.DTOs.AuthDTOs.UserLoginDTO",
         "IsRequired": true
       }
     ],
@@ -28,14 +28,14 @@
   {
     "ContainingType": "EcommerceAPI.Controllers.AuthController",
     "Method": "SignUp",
-    "RelativePath": "signup",
+    "RelativePath": "api/Auth/Signup",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "registerdto",
-        "Type": "EcommerceAPI.DTOs.UserRegistrationDTO",
+        "Type": "EcommerceAPI.DTOs.AuthDTOs.UserRegistrationDTO",
         "IsRequired": true
       }
     ],
@@ -44,7 +44,7 @@
   {
     "ContainingType": "EcommerceAPI.Controllers.AuthController",
     "Method": "VerifyEmail",
-    "RelativePath": "verify-email",
+    "RelativePath": "api/Auth/VerifyEmail",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -56,5 +56,155 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
+    "Method": "ChangePasswordAsync",
+    "RelativePath": "api/UserProfile/ChangePassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePasswordDTO",
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.ChangePasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
+    "Method": "ForgotPasswordAsync",
+    "RelativePath": "api/UserProfile/ForgotPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "forgotPasswordDTO",
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.ForgotPasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
+    "Method": "GetUserProfileAsync",
+    "RelativePath": "api/UserProfile/GetUserProfile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.UserProfileDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
+    "Method": "ResetPasswordAsync",
+    "RelativePath": "api/UserProfile/ResetPassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetPasswordDTO",
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.ResetPasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
+    "Method": "UpdatePhoneNumberAsync",
+    "RelativePath": "api/UserProfile/UpdatePhoneNumber",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "phoneNumberDTO",
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.UpdatePhoneNumberDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.UserProfileDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
+    "Method": "UpdateUserNameAsync",
+    "RelativePath": "api/UserProfile/UpdateUsername",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usernameDTO",
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.UpdateUsernameDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.UserProfileDTOs.UserProfileDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

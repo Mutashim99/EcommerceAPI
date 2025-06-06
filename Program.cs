@@ -10,6 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
 using EcommerceAPI.Services.UserManagement.UserProfileManagement;
+using Microsoft.OpenApi.Models;
 
 
 
@@ -37,7 +38,37 @@ builder.Services.AddAuthentication("Bearer")
                 Encoding.UTF8.GetBytes(builder.Configuration["JwtSettings:Key"]))
         };
     });
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "EcommerceAPI", Version = "v1" });
 
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "Enter 'Bearer' followed by your JWT token. Example: Bearer eyJhbGciOi..."
+    });
+
+ 
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] {}
+        }
+    });
+});
 builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuth,AuthService>();
 builder.Services.AddScoped<IEmail, EmailService>();

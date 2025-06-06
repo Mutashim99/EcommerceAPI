@@ -1,4 +1,4 @@
-﻿using EcommerceAPI.DTOs;
+﻿using EcommerceAPI.DTOs.AuthDTOs;
 using EcommerceAPI.Models;
 
 namespace EcommerceAPI.Services.Auth

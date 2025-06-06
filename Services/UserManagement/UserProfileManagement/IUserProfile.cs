@@ -1,4 +1,4 @@
-﻿using EcommerceAPI.DTOs;
+﻿using EcommerceAPI.DTOs.UserProfileDTOs;
 using EcommerceAPI.Models;
 
 namespace EcommerceAPI.Services.UserManagement.UserProfileManagement

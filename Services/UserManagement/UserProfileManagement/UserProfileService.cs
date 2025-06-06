@@ -1,6 +1,6 @@
 ﻿
 using AutoMapper;
-using EcommerceAPI.DTOs;
+using EcommerceAPI.DTOs.UserProfileDTOs;
 using EcommerceAPI.Models;
 using EcommerceAPI.Services.Email;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +19,7 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
             this.db = db;
             this.mapper = mapper;
             _config = config;
-            this.sendemail = email;
+            sendemail = email;
         }
 
         public async Task<ServiceResponse<UserProfileDTO>> GetUserProfileAsync(int Id)
@@ -162,8 +162,8 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
 
             var subject = "Password Reset Link";
             var body = $@"
-                    <h1>HOW DUMB YOU ARE TO FORGET YOUR PASSWORD!</h1>
-                    <h2>anyways here is your link to reset your password! 
+                    <h1>Reset Your Password</h1>
+                    <h2>here is the link to reset your password! 
                         <a href='{Passresetlink}' target='_blank'>this link</a>.
                     </h2>";
             var SendEmailResult = await sendemail.SendEmailAsync(CurrentUser.Email, subject, body);
@@ -201,6 +201,8 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
             var newHashedPassword = BCrypt.Net.BCrypt.HashPassword(newpassword);
             Currentuser.PasswordHash = newHashedPassword;
             await db.SaveChangesAsync();
+            Currentuser.ResetPasswordToken = null;
+            Currentuser.ResetPasswordTokenExpiry = null;
 
 
             return new ServiceResponse<string>
@@ -210,12 +212,6 @@ namespace EcommerceAPI.Services.UserManagement.UserProfileManagement
                 Success = true
             };
         }
-
-
-
-
-
-
 
 
     }

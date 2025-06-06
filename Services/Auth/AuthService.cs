@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BCrypt.Net;
 using EcommerceAPI.Data;
-using EcommerceAPI.DTOs;
+using EcommerceAPI.DTOs.AuthDTOs;
 using EcommerceAPI.Models;
 using EcommerceAPI.Services.Email;
 using Microsoft.EntityFrameworkCore;
