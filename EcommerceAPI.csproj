@@ -29,7 +29,6 @@
     <Folder Include="Services\UserManagement\UserFavoriteManagement\" />
     <Folder Include="Services\UserManagement\UserReviewManagement\" />
     <Folder Include="Services\UserManagement\UserOrderManagement\" />
-    <Folder Include="Services\UserManagement\UserAddressManagement\" />
   </ItemGroup>
 
 </Project>

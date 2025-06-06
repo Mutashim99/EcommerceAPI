@@ -85,19 +85,29 @@
       }
     },
     "/api/Auth/VerifyEmail": {
-      "get": {
+      "post": {
         "tags": [
           "Auth"
         ],
-        "parameters": [
-          {
-            "name": "token",
-            "in": "query",
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyEmailDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyEmailDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyEmailDTO"
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -523,6 +533,16 @@
             "type": "string"
           },
           "role": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerifyEmailDTO": {
+        "type": "object",
+        "properties": {
+          "token": {
             "type": "string",
             "nullable": true
           }

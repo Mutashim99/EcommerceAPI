@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EcommerceAPI.Models
+namespace EcommerceAPI.DTOs.UserAddressDTOs
 {
-    public class Address
+    public class CreateAddressDto
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
         public string Street { get; set; }
 
@@ -21,10 +18,10 @@ namespace EcommerceAPI.Models
 
         [Required]
         public string Country { get; set; }
-        public bool IsDefault { get; set; } = true;
+
         public string Label { get; set; } = "Home";
 
-        public int UserId { get; set; } // 1 user can have many addresses so that he can select at checkout page which oneb he wants to choose for the delivery of this order
-        public User? User { get; set; } // Jis user ka address he wo
+        public bool IsDefault { get; set; } = false;
     }
+
 }

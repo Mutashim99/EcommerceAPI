@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using EcommerceAPI.Services.UserManagement.UserProfileManagement;
 using Microsoft.OpenApi.Models;
+using EcommerceAPI.Services.UserManagement.UserAddressManagement;
 
 
 
@@ -73,6 +74,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuth,AuthService>();
 builder.Services.AddScoped<IEmail, EmailService>();
 builder.Services.AddScoped<IUserProfile,UserProfileService>();
+builder.Services.AddScoped<IUserAddress,UserAddressService>();
 builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 

@@ -45,14 +45,14 @@
     "ContainingType": "EcommerceAPI.Controllers.AuthController",
     "Method": "VerifyEmail",
     "RelativePath": "api/Auth/VerifyEmail",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "token",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "verifyEmailDTO",
+        "Type": "EcommerceAPI.DTOs.AuthDTOs.VerifyEmailDTO",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
