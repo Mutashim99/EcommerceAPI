@@ -26,8 +26,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\UserManagement\UserFavoriteManagement\" />
-    <Folder Include="Services\UserManagement\UserReviewManagement\" />
     <Folder Include="Services\UserManagement\UserOrderManagement\" />
   </ItemGroup>
 

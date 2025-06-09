@@ -3,6 +3,7 @@
     public class FavoriteItem
     {
         public int Id { get; set; }
+        public DateTime DateAdded { get; set; } = DateTime.Now;
 
         public int UserId { get; set; } // jis user ne add kya product ko as favorite uski id(FK)
         public User User { get; set; } // user 

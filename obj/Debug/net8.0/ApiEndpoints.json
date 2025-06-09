@@ -135,6 +135,124 @@
     ]
   },
   {
+    "ContainingType": "EcommerceAPI.Controllers.UserCartController",
+    "Method": "AddCartItemAsync",
+    "RelativePath": "api/UserCart/AddCartItem",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EcommerceAPI.DTOs.UserCartDTOs.CreateCartItemDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.UserCartDTOs.CartItemResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserCartController",
+    "Method": "ClearCartAsync",
+    "RelativePath": "api/UserCart/ClearCart",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserCartController",
+    "Method": "GetCartItemsAsync",
+    "RelativePath": "api/UserCart/GetCartItems",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.UserCartDTOs.CartItemResponseDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserCartController",
+    "Method": "RemoveCartItemAsync",
+    "RelativePath": "api/UserCart/RemoveCartItem/{cartItemId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cartItemId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.UserCartDTOs.CartItemResponseDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserCartController",
+    "Method": "UpdateCartItemQuantityAsync",
+    "RelativePath": "api/UserCart/UpdateCartItemQuantity",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "EcommerceAPI.DTOs.UserCartDTOs.UpdateCartItemQuantityDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.UserCartDTOs.CartItemResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
     "Method": "ChangePasswordAsync",
     "RelativePath": "api/UserProfile/ChangePassword",

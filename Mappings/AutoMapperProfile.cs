@@ -6,6 +6,7 @@ using EcommerceAPI.DTOs.ProductVariantDTOs;
 using EcommerceAPI.DTOs.ReviewDTOs;
 using EcommerceAPI.DTOs.UserAddressDTOs;
 using EcommerceAPI.DTOs.UserCartDTOs;
+using EcommerceAPI.DTOs.UserFavoriteDTOs;
 using EcommerceAPI.DTOs.UserProfileDTOs;
 using EcommerceAPI.Models;
 
@@ -34,6 +35,9 @@ namespace EcommerceAPI.Mappings
             CreateMap<CartItem,CartItemResponseDTO>();
 
             CreateMap<CreateCartItemDTO, CartItem>();
+
+            CreateMap<FavoriteItem, FavoriteResponseDTO>();
+            CreateMap<CreateFavoriteDTO, FavoriteItem>();
         }
     }
 }
