@@ -1,6 +1,14 @@
-﻿namespace EcommerceAPI.DTOs.UserCartDTOs
+﻿using EcommerceAPI.DTOs.ProductDTOs;
+
+namespace EcommerceAPI.DTOs.UserCartDTOs
 {
-    public interface CartItemResponseDTO
+    public class CartItemResponseDTO
     {
+        public int CartItemId { get; set; }
+        public int Quantity { get; set; }
+        public DateTime Added { get; set; }
+
+        public ProductResponseDTO? Product { get; set; }
     }
+
 }

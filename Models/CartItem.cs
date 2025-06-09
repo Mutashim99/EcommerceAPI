@@ -20,5 +20,9 @@ namespace EcommerceAPI.Models
         public Product Product { get; set; }   // the product that is in the cart
 
 
+        public int ProductVariantId { get; set; }
+        public ProductVariant Variant { get; set; }
+
+
     }
 }

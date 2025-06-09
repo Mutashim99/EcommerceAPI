@@ -1,12 +1,14 @@
-﻿namespace EcommerceAPI.Services.UserManagement.UserCartManagement
+﻿using EcommerceAPI.DTOs.UserCartDTOs;
+
+namespace EcommerceAPI.Services.UserManagement.UserCartManagement
 {
     public interface IUserCart
     {
-        Task<List<CartItemDto>> GetCartItemsAsync(int userId);
-        Task AddCartItemAsync(int userId, AddCartItemRequest request);
-        Task UpdateCartItemQuantityAsync(int userId, int cartItemId, int newQuantity);
-        Task RemoveCartItemAsync(int userId, int cartItemId);
-        Task ClearCartAsync(int userId);
+        public Task<ServiceResponse<List<CartItemResponseDTO>>> GetCartItemsAsync(int userId);
+        public Task<ServiceResponse<CartItemResponseDTO>> AddCartItemAsync(int userId,  CreateCartItemDTO request);
+        public Task<ServiceResponse<CartItemResponseDTO>> UpdateCartItemQuantityAsync(int userId, int cartItemId, int newQuantity);
+        public Task<ServiceResponse<List<CartItemResponseDTO>>> RemoveCartItemAsync(int userId, int cartItemId);
+        Task<ServiceResponse<string>> ClearCartAsync(int userId);
     }
 
 }

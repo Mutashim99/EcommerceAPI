@@ -1,6 +1,11 @@
 ﻿using AutoMapper;
 using EcommerceAPI.DTOs.AuthDTOs;
+using EcommerceAPI.DTOs.CategoryDTOs;
+using EcommerceAPI.DTOs.ProductDTOs;
+using EcommerceAPI.DTOs.ProductVariantDTOs;
+using EcommerceAPI.DTOs.ReviewDTOs;
 using EcommerceAPI.DTOs.UserAddressDTOs;
+using EcommerceAPI.DTOs.UserCartDTOs;
 using EcommerceAPI.DTOs.UserProfileDTOs;
 using EcommerceAPI.Models;
 
@@ -18,8 +23,17 @@ namespace EcommerceAPI.Mappings
             CreateMap<UserLoginDTO, UserLoginDTO>();
 
             CreateMap<User,UserProfileDTO>();
+
             CreateMap<CreateAddressDto, Address>();
             CreateMap<Address,AddressResponseDto>();
+
+            CreateMap<Product, ProductResponseDTO>();
+            CreateMap<Category, CategoryResponseDTO>();
+            CreateMap<Review, ReviewResponseDTO>();
+            CreateMap<ProductVariant, ProductVariantResponseDTO>();
+            CreateMap<CartItem,CartItemResponseDTO>();
+
+            CreateMap<CreateCartItemDTO, CartItem>();
         }
     }
 }
