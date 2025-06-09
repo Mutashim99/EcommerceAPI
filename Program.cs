@@ -13,6 +13,7 @@ using EcommerceAPI.Services.UserManagement.UserProfileManagement;
 using Microsoft.OpenApi.Models;
 using EcommerceAPI.Services.UserManagement.UserAddressManagement;
 using EcommerceAPI.Services.UserManagement.UserFavoriteManagement;
+using EcommerceAPI.Services.UserManagement.UserReviewManagement;
 
 
 
@@ -77,6 +78,7 @@ builder.Services.AddScoped<IEmail, EmailService>();
 builder.Services.AddScoped<IUserProfile,UserProfileService>();
 builder.Services.AddScoped<IUserAddress,UserAddressService>();
 builder.Services.AddScoped<IUserFavorite, UserFavoriteService>();
+builder.Services.AddScoped<IUserReview,UserReviewService>();
 builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
