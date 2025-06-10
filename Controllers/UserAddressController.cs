@@ -79,7 +79,7 @@ namespace EcommerceAPI.Controllers
         }
 
         [Authorize]
-        [HttpDelete("/DeleteAddress/{AddressId}")]
+        [HttpDelete("DeleteAddress/{AddressId}")]
         public async Task<ActionResult<string>> DeleteAddressAsync(int AddressId)
         {
             var userIdClaim = User.FindFirst("UserId")?.Value;

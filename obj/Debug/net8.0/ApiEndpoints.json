@@ -85,6 +85,32 @@
   },
   {
     "ContainingType": "EcommerceAPI.Controllers.UserAddressController",
+    "Method": "DeleteAddressAsync",
+    "RelativePath": "api/UserAddress/DeleteAddress/{AddressId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "AddressId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserAddressController",
     "Method": "GetAddressesAsync",
     "RelativePath": "api/UserAddress/GetAddresses",
     "HttpMethod": "GET",
@@ -253,6 +279,78 @@
     ]
   },
   {
+    "ContainingType": "EcommerceAPI.Controllers.UserFavoriteController",
+    "Method": "GetFavoritesAsync",
+    "RelativePath": "api/UserFavorite",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.UserFavoriteDTOs.FavoriteResponseDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserFavoriteController",
+    "Method": "AddToFavoritesAsync",
+    "RelativePath": "api/UserFavorite/AddtoFavorite/{ProductId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.UserFavoriteDTOs.FavoriteResponseDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserFavoriteController",
+    "Method": "RemoveFromFavoritesAsync",
+    "RelativePath": "api/UserFavorite/RemoveFavorite/{ProductId}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.UserFavoriteDTOs.FavoriteResponseDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EcommerceAPI.Controllers.UserProfileController",
     "Method": "ChangePasswordAsync",
     "RelativePath": "api/UserProfile/ChangePassword",
@@ -403,15 +501,41 @@
     ]
   },
   {
-    "ContainingType": "EcommerceAPI.Controllers.UserAddressController",
-    "Method": "DeleteAddressAsync",
-    "RelativePath": "DeleteAddress/{AddressId}",
+    "ContainingType": "EcommerceAPI.Controllers.UserReviewController",
+    "Method": "AddReviewAsync",
+    "RelativePath": "api/UserReview/AddReview",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reviewDto",
+        "Type": "EcommerceAPI.DTOs.ReviewDTOs.CreateReviewDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.ReviewDTOs.UserReviewResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserReviewController",
+    "Method": "DeleteReviewAsync",
+    "RelativePath": "api/UserReview/DeleteReview/{reviewId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "AddressId",
+        "Name": "reviewId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -419,6 +543,103 @@
     "ReturnTypes": [
       {
         "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserReviewController",
+    "Method": "GetMyReviewForProductAsync",
+    "RelativePath": "api/UserReview/GetMyReviewForProduct/{productId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "productId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.ReviewDTOs.UserReviewResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserReviewController",
+    "Method": "GetMyReviewsAsync",
+    "RelativePath": "api/UserReview/GetMyReviews",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.ReviewDTOs.UserReviewResponseDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserReviewController",
+    "Method": "GetReviewableProductsAsync",
+    "RelativePath": "api/UserReview/GetReviewableProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.ReviewDTOs.PendingReviewProductDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.UserReviewController",
+    "Method": "UpdateReviewAsync",
+    "RelativePath": "api/UserReview/UpadateReview/{reviewId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reviewId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "reviewDto",
+        "Type": "EcommerceAPI.DTOs.ReviewDTOs.UpdateReviewDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.ReviewDTOs.UserReviewResponseDTO",
         "MediaTypes": [
           "text/plain",
           "application/json",

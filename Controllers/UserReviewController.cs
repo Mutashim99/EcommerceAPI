@@ -39,7 +39,7 @@ namespace EcommerceAPI.Controllers
             {
                 return Unauthorized("User is not authorized");
             }
-            var GetMyReviewResult = await userReview.GetMyReviewForProductAsync(userId, ProductId);
+            var GetMyReviewResult = await userReview.GetMyReviewForProductAsync(userId, productId);
             if(GetMyReviewResult.Success == false) {
                 return BadRequest(GetMyReviewResult.Message);    
             }
