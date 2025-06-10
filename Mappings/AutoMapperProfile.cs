@@ -42,11 +42,11 @@ namespace EcommerceAPI.Mappings
             CreateMap<Review, UserReviewResponseDTO>();
             CreateMap<CreateReviewDTO, Review>();
             CreateMap<OrderItem, PendingReviewProductDTO>()
-    .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.Id))
-    .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
-    .ForMember(dest => dest.ImageURL, opt => opt.MapFrom(src => src.Product.ImageURL))
-    .ForMember(dest => dest.OrderTotalAmount, opt => opt.MapFrom(src => src.Order.TotalAmount))
-    .ForMember(dest => dest.OrderStatus, opt => opt.MapFrom(src => src.Order.OrderStatus));
+            .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.Id))
+            .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
+            .ForMember(dest => dest.ImageURL, opt => opt.MapFrom(src => src.Product.ImageURL))
+            .ForMember(dest => dest.OrderTotalAmount, opt => opt.MapFrom(src => src.Order.TotalAmount))
+            .ForMember(dest => dest.OrderStatus, opt => opt.MapFrom(src => src.Order.OrderStatus));
 
         }
     }
