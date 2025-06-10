@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using EcommerceAPI.DTOs.AuthDTOs;
 using EcommerceAPI.DTOs.CategoryDTOs;
+using EcommerceAPI.DTOs.OrderDTOs;
 using EcommerceAPI.DTOs.ProductDTOs;
 using EcommerceAPI.DTOs.ProductVariantDTOs;
 using EcommerceAPI.DTOs.ReviewDTOs;
@@ -47,6 +48,30 @@ namespace EcommerceAPI.Mappings
             .ForMember(dest => dest.ImageURL, opt => opt.MapFrom(src => src.Product.ImageURL))
             .ForMember(dest => dest.OrderTotalAmount, opt => opt.MapFrom(src => src.Order.TotalAmount))
             .ForMember(dest => dest.OrderStatus, opt => opt.MapFrom(src => src.Order.OrderStatus));
+
+
+            CreateMap<Order, UserOrderResponseDTO>()
+            .ForMember(dest => dest.OrderId, opt => opt.MapFrom(src => src.Id));
+
+            CreateMap<Order, UserOrderDetailsResponseDTO>()
+            .ForMember(dest => dest.OrderId, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.ShippingAddress, opt => opt.MapFrom(src => src.Address))
+            .ForMember(dest => dest.Items, opt => opt.MapFrom(src => src.OrderItems));
+
+            CreateMap<OrderItem, OrderItemResponseDTO>()
+            .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name));
+            CreateMap<Address, OrderAddressResponseDTO>();
+            CreateMap<CartItem, CheckoutPreviewResponseDTO>()
+            .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
+            .ForMember(dest => dest.ImageURL, opt => opt.MapFrom(src => src.Product.ImageURL))
+            .ForMember(dest => dest.Price, opt => opt.MapFrom(src => src.Variant.Price))
+            .ForMember(dest => dest.VariantId, opt => opt.MapFrom(src => src.Variant.Id))
+            .ForMember(dest => dest.VariantColor, opt => opt.MapFrom(src => src.Variant.Color))
+            .ForMember(dest => dest.VariantSize, opt => opt.MapFrom(src => src.Variant.Size));
+
+            CreateMap<CartItem, OrderItem>()
+                .ForMember(dest => dest.PriceAtPurchaseTime, opt => opt.MapFrom(src => src.Variant.Price))
+            .ForMember(dest => dest.VariantId, opt => opt.MapFrom(src => src.ProductVariantId));
 
         }
     }

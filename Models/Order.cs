@@ -13,6 +13,7 @@ namespace EcommerceAPI.Models
 
         public decimal TotalAmount { get; set; }
 
+        public string PaymentMethod { get; set; } = string.Empty;
 
         public int UserId { get; set; }     // FK to User (who placed the order)
         public User User { get; set; }
