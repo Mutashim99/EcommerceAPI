@@ -3,7 +3,9 @@ using EcommerceAPI.DTOs.OrderDTOs;
 using EcommerceAPI.Models;
 using EcommerceAPI.Services.Email;
 using EcommerceAPI.Services.UserManagement.UserAddressManagement;
+using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
 {
@@ -21,14 +23,53 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
             this.emailService = emailService;
         }
 
-        public Task<ServiceResponse<List<UserOrderResponseDTO>>> GetMyOrdersAsync(int userId)
+        public async Task<ServiceResponse<List<UserOrderResponseDTO>>> GetMyOrdersAsync(int userId)
         {
-            throw new NotImplementedException();
+            var allUserOrders = await db.Orders.Where(x=> x.UserId == userId).OrderByDescending(o => o.OrderDate).ToListAsync();
+
+            if(!allUserOrders.Any())
+    {
+                return new ServiceResponse<List<UserOrderResponseDTO>>
+                {
+                    Success = false,
+                    Message = "No orders found for this user.",
+                    Data = null
+                };
+            }
+            var MappedIntoUserOrderResponse = mapper.Map<List<UserOrderResponseDTO>>(allUserOrders);
+            return new ServiceResponse<List<UserOrderResponseDTO>>
+            {
+                Success = true,
+                Message = "Orders retrieved successfully.",
+                Data = MappedIntoUserOrderResponse
+            };
         }
 
-        public Task<ServiceResponse<UserOrderDetailsResponseDTO>> GetOrderDetailsAsync(int userId, int orderId)
+        public async Task<ServiceResponse<UserOrderDetailsResponseDTO>> GetOrderDetailsAsync(int userId, int orderId)
         {
-            throw new NotImplementedException();
+            var OrderDetail = await db.Orders
+                .Include(x=> x.Address)
+                .Include(x=> x.OrderItems)
+                .ThenInclude(x=> x.Product)
+                .Include(x => x.OrderItems)
+                .ThenInclude(x=> x.Variant)
+                .FirstOrDefaultAsync(x=> x.Id == orderId && x.UserId == userId);
+            if (OrderDetail == null)
+            {
+                return new ServiceResponse<UserOrderDetailsResponseDTO>
+                {
+                    Success = false,
+                    Message = "Order not found.",
+                    Data = null
+                };
+            }
+            var mappedOrderDetailIntoDTO = mapper.Map<UserOrderDetailsResponseDTO>(OrderDetail);
+            return new ServiceResponse<UserOrderDetailsResponseDTO>
+            {
+                Success = true,
+                Message = "Order details retrieved successfully.",
+                Data = mappedOrderDetailIntoDTO
+            };
         }
 
 
@@ -138,9 +179,55 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
             };
         }
 
-        public Task<ServiceResponse<bool>> CancelOrderAsync(int userId, int orderId)
+        public async Task<ServiceResponse<string>> CancelOrderAsync(int userId, int orderId)
         {
-            throw new NotImplementedException();
+            var CurrentOrder = await db.Orders.FirstOrDefaultAsync(x => x.Id == orderId && x.UserId == userId);
+            if (CurrentOrder == null)
+            {
+                return new ServiceResponse<string>
+                {
+                    Success = false,
+                    Message = "Order Does not exist",
+                    Data = "The Order that you are trying to delete does not exist"
+                };
+            }
+            if (string.Equals(CurrentOrder.OrderStatus, "Processing", StringComparison.OrdinalIgnoreCase))
+            {
+                return new ServiceResponse<string>
+                {
+                    Success = false,
+                    Message = "Order cannot be cancelled while processing.",
+                    Data = "The order status is currently processing. Contact support for further help."
+                };
+            }
+
+            if (string.Equals(CurrentOrder.OrderStatus, "Cancelled", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(CurrentOrder.OrderStatus, "Delivered", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(CurrentOrder.OrderStatus, "Completed", StringComparison.OrdinalIgnoreCase))
+            {
+                return new ServiceResponse<string>
+                {
+                    Success = false,
+                    Message = "This order cannot be cancelled.",
+                    Data = $"Order is already {CurrentOrder.OrderStatus}."
+                };
+            }
+
+
+            CurrentOrder.OrderStatus = "Cancelled";
+
+            var currentUser = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+
+            await  db.SaveChangesAsync();
+
+            await emailService.SendEmailAsync(currentUser.Email, "Order Cancelled", $"Your order #{CurrentOrder.Id} has been cancelled.");
+
+            return new ServiceResponse<string>
+            {
+                Success = true,
+                Message = "Order Cancelled Succesfully",
+                Data = $"Your Order {CurrentOrder.Id} has been {CurrentOrder.OrderStatus} succesfully"
+            };
         }
 
 

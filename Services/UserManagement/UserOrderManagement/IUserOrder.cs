@@ -8,6 +8,6 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
         Task<ServiceResponse<List<CheckoutPreviewResponseDTO>>> GetCheckoutPreviewAsync(int userId, List<int> cartItemIds);
         Task<ServiceResponse<List<UserOrderResponseDTO>>> GetMyOrdersAsync(int userId);
         Task<ServiceResponse<UserOrderDetailsResponseDTO>> GetOrderDetailsAsync(int userId, int orderId);
-        Task<ServiceResponse<bool>> CancelOrderAsync(int userId, int orderId);
+        Task<ServiceResponse<string>> CancelOrderAsync(int userId, int orderId);
     }
 }
