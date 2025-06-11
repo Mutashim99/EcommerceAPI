@@ -71,7 +71,7 @@ namespace EcommerceAPI.Controllers
             return Ok(response.Data);
         }
 
-        [HttpPost("place-order")]
+        [HttpPost("PlaceOrder")]
         public async Task<ActionResult<int>> PlaceOrderAsync([FromBody] CreateOrderDTO request)
         {
             var userIdClaim = User.FindFirst("UserId")?.Value;
@@ -86,10 +86,10 @@ namespace EcommerceAPI.Controllers
                 return BadRequest(response.Message);
             }
 
-            return Ok(new { OrderId = response.Data , Message = "Order Placed Succesfully"}); // Order ID
+            return Ok(new { OrderId = response.Data , Message = "Order Placed Succesfully"}); 
         }
 
-        [HttpPost("cancel/{orderId}")]
+        [HttpPut("cancel/{orderId}")]
         public async Task<ActionResult<string>> CancelOrderAsync(int orderId)
         {
             var userIdClaim = User.FindFirst("UserId")?.Value;

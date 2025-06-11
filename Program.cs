@@ -16,6 +16,7 @@ using EcommerceAPI.Services.UserManagement.UserFavoriteManagement;
 using EcommerceAPI.Services.UserManagement.UserReviewManagement;
 using EcommerceAPI.Services.UserManagement.UserCartManagement;
 using EcommerceAPI.Services.UserManagement.UserOrderManagement;
+using EcommerceAPI.Services.Product;
 
 
 
@@ -82,7 +83,8 @@ builder.Services.AddScoped<IUserAddress,UserAddressService>();
 builder.Services.AddScoped<IUserFavorite, UserFavoriteService>();
 builder.Services.AddScoped<IUserReview,UserReviewService>();
 builder.Services.AddScoped<IUserCart, UserCartService>();
-builder.Services.AddScoped<IUserOrder, UserOrderService>();
+builder.Services.AddScoped<IUserOrder,UserOrderService>();
+builder.Services.AddScoped<IProduct, ProductService>();
 builder.Services.AddAutoMapper(typeof(Program));
 var app = builder.Build();
 
