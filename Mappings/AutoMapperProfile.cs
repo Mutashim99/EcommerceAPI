@@ -31,6 +31,7 @@ namespace EcommerceAPI.Mappings
 
             CreateMap<Product, ProductResponseDTO>();
             CreateMap<Category, CategoryResponseDTO>();
+            CreateMap<CategoryResponseDTO, Category>();
             CreateMap<Review, ReviewResponseDTO>();
             CreateMap<ProductVariant, ProductVariantResponseDTO>();
             CreateMap<CartItem,CartItemResponseDTO>();
@@ -72,6 +73,8 @@ namespace EcommerceAPI.Mappings
             CreateMap<CartItem, OrderItem>()
                 .ForMember(dest => dest.PriceAtPurchaseTime, opt => opt.MapFrom(src => src.Variant.Price))
             .ForMember(dest => dest.VariantId, opt => opt.MapFrom(src => src.ProductVariantId));
+
+            CreateMap<Product, ProductForDisplayResponseDTO>();
 
         }
     }

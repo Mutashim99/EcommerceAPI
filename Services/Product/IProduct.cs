@@ -5,13 +5,12 @@ namespace EcommerceAPI.Services.Product
 {
     public interface IProduct
     {
-        Task<ServiceResponse<List<ProductResponseDTO>>> GetAllProductsAsync();
-        Task<ServiceResponse<ProductResponseDTO>> GetProductByIdAsync(int productId);
+        Task<ServiceResponse<List<ProductForDisplayResponseDTO>>> GetAllProductsAsync();
+        Task<ServiceResponse<ProductForDisplayResponseDTO>> GetProductByIdAsync(int productId);
         Task<ServiceResponse<List<CategoryResponseDTO>>> GetAllCategoriesAsync();
-        Task<ServiceResponse<List<ProductResponseDTO>>> GetProductsByCategoryAsync(string categoryName);
-        Task<ServiceResponse<List<ProductResponseDTO>>> GetProductsByBrandAsync(string brandName);
-        Task<ServiceResponse<List<ProductResponseDTO>>> GetPopularProductsAsync();
-        Task<ServiceResponse<List<ProductResponseDTO>>> GetNewArrivalsAsync();
-        Task<ServiceResponse<List<ProductResponseDTO>>> GetRelatedProductsAsync(int productId);
+        Task<ServiceResponse<List<ProductForDisplayResponseDTO>>> GetProductsByCategoryAsync(string categoryName);
+        Task<ServiceResponse<List<ProductForDisplayResponseDTO>>> GetProductsByBrandAsync(string brandName);
+        Task<ServiceResponse<List<ProductForDisplayResponseDTO>>> GetNewArrivalsAsync();
+        Task<ServiceResponse<List<ProductForDisplayResponseDTO>>> GetRelatedProductsAsync(int productId);
     }
 }
