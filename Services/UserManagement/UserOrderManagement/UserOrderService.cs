@@ -145,9 +145,9 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
                 return new ServiceResponse<int> { Success = false, Message = "Address is required (either Add an address in your profile or add New Address here )." };
             }
 
-            // 🧮 Calculate total
+            // Calculate total
             decimal totalAmount = cartItems.Sum(ci => ci.Variant.Price * ci.Quantity);
-
+            
             var order = new Order
             {
                 UserId = userId,
@@ -160,6 +160,30 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
             };
             var orderItems = mapper.Map<List<OrderItem>>(cartItems);
             order.OrderItems = orderItems;
+
+            foreach (var cartItem in cartItems)
+            {
+                var variant = await db.ProductVariants.FirstOrDefaultAsync(v => v.Id == cartItem.ProductVariantId);
+                if (variant == null)
+                {
+                    return new ServiceResponse<int>
+                    {
+                        Success = false,
+                        Message = $"Product variant with ID {cartItem.ProductVariantId} not found."
+                    };
+                }
+
+                if (variant.Stock < cartItem.Quantity)
+                {
+                    return new ServiceResponse<int>
+                    {
+                        Success = false,
+                        Message = $"Insufficient stock for {cartItem.Product.Name} (Variant: {variant.Color}, {variant.Size})."
+                    };
+                }
+
+                variant.Stock -= cartItem.Quantity; 
+            }
 
 
             await db.Orders.AddAsync(order);

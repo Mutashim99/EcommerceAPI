@@ -25,9 +25,9 @@ namespace EcommerceAPI.Controllers
             var RegisterAsyncResult = await auth.RegisterAsync(registerdto);
             if(RegisterAsyncResult.Success == true)
             {
-                return Ok(RegisterAsyncResult.Message);
+                return Ok(new {message = RegisterAsyncResult.Message , success = RegisterAsyncResult.Success });
             }
-            return BadRequest(RegisterAsyncResult.Message);
+            return BadRequest(new { message =  RegisterAsyncResult.Message, success = RegisterAsyncResult.Success });
         }
 
         [HttpPost("Login")]
@@ -41,10 +41,11 @@ namespace EcommerceAPI.Controllers
                 return Ok(new
                 {
                     token = LoginResponse.Data,
-                    message = LoginResponse.Message
+                    message = LoginResponse.Message,
+                    success = LoginResponse.Success
                 });
             }
-            return BadRequest(LoginResponse.Message);
+            return BadRequest( new { LoginResponse.Message , success = LoginResponse.Success });
 
         }
         [HttpPost("VerifyEmail")]
