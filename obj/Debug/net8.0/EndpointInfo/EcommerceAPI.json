@@ -5,8 +5,8 @@
     "version": "v1"
   },
   "paths": {
-    "/api/AdminRegister": {
-      "get": {
+    "/api/AdminRegister/RegisterAdmin": {
+      "post": {
         "tags": [
           "AdminRegister"
         ],

@@ -17,7 +17,7 @@ namespace EcommerceAPI.Controllers
             this.adminAuth = adminAuth;
         }
 
-        [HttpGet]
+        [HttpPost("RegisterAdmin")]
         [Authorize(Roles ="SuperAdmin")]
         public async Task<IActionResult> registerAdmin(RegisterAdminDTO registerAdminDTO)
         {

@@ -78,8 +78,8 @@ namespace EcommerceAPI.Mappings
             CreateMap<Product, ProductForDisplayResponseDTO>();
 
 
-            CreateMap<RegisterAdminDTO, User>()
-                .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
+            CreateMap<RegisterAdminDTO, User>();    
+               
 
         }
     }

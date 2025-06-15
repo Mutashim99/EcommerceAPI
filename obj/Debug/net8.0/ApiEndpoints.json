@@ -2,8 +2,8 @@
   {
     "ContainingType": "EcommerceAPI.Controllers.AdminRegisterController",
     "Method": "registerAdmin",
-    "RelativePath": "api/AdminRegister",
-    "HttpMethod": "GET",
+    "RelativePath": "api/AdminRegister/RegisterAdmin",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
