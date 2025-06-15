@@ -5,6 +5,37 @@
     "version": "v1"
   },
   "paths": {
+    "/api/AdminRegister": {
+      "get": {
+        "tags": [
+          "AdminRegister"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterAdminDTO"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterAdminDTO"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterAdminDTO"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Auth/Signup": {
       "post": {
         "tags": [
@@ -2211,6 +2242,34 @@
           "variantImageUrl": {
             "type": "string",
             "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RegisterAdminDTO": {
+        "required": [
+          "email",
+          "password",
+          "phoneNumber",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "email": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "phoneNumber": {
+            "minLength": 1,
+            "type": "string"
           }
         },
         "additionalProperties": false

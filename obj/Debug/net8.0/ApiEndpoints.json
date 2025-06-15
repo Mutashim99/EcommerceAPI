@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "EcommerceAPI.Controllers.AdminRegisterController",
+    "Method": "registerAdmin",
+    "RelativePath": "api/AdminRegister",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerAdminDTO",
+        "Type": "EcommerceAPI.DTOs.AdminDTOs.RegisterAdminDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "EcommerceAPI.Controllers.AuthController",
     "Method": "Login",
     "RelativePath": "api/Auth/Login",

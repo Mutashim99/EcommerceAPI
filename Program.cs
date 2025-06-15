@@ -17,8 +17,9 @@ using EcommerceAPI.Services.UserManagement.UserReviewManagement;
 using EcommerceAPI.Services.UserManagement.UserCartManagement;
 using EcommerceAPI.Services.UserManagement.UserOrderManagement;
 using EcommerceAPI.Services.Product;
+using EcommerceAPI.Services.AdminManagement.AdminAuth;
 
-
+using BCrypt.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -85,8 +86,18 @@ builder.Services.AddScoped<IUserReview,UserReviewService>();
 builder.Services.AddScoped<IUserCart, UserCartService>();
 builder.Services.AddScoped<IUserOrder,UserOrderService>();
 builder.Services.AddScoped<IProduct, ProductService>();
+builder.Services.AddScoped<IAdminAuth, AdminAuthService>();
 builder.Services.AddAutoMapper(typeof(Program));
+
+
+string plainPassword = "SuperAdminIsVeryCool";
+string hashedPassword = BCrypt.Net.BCrypt.HashPassword(plainPassword);
+Console.WriteLine(hashedPassword);
+
+
 var app = builder.Build();
+
+
 
 
 

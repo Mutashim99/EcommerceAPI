@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EcommerceAPI.DTOs.AdminDTOs;
 using EcommerceAPI.DTOs.AuthDTOs;
 using EcommerceAPI.DTOs.CategoryDTOs;
 using EcommerceAPI.DTOs.OrderDTOs;
@@ -75,6 +76,10 @@ namespace EcommerceAPI.Mappings
             .ForMember(dest => dest.VariantId, opt => opt.MapFrom(src => src.ProductVariantId));
 
             CreateMap<Product, ProductForDisplayResponseDTO>();
+
+
+            CreateMap<RegisterAdminDTO, User>()
+                .ForMember(dest => dest.PasswordHash, opt => opt.MapFrom(src => src.Password));
 
         }
     }

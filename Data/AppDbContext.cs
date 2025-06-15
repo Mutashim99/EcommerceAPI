@@ -41,6 +41,20 @@ namespace EcommerceAPI.Data
                 .WithMany() // no back reference from Address to Orders
                 .HasForeignKey(o => o.AddressId)
                 .OnDelete(DeleteBehavior.Restrict); // Disable cascade delete here
+
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1,
+                Username = "Super Admin",
+                Email = "superadmin@ecommerce.com",
+                PasswordHash = "$2a$11$5i0fmOjS1mglQE4XUp7BPO.3S5puIyLqFIef9CBqODZjdSLopY3Uu",
+                Role = "SuperAdmin",
+                PhoneNumber = "03202048421",
+                IsEmailVerified = true,
+            });
         }
 
     }
