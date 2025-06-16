@@ -79,7 +79,7 @@ namespace EcommerceAPI.Mappings
 
 
             CreateMap<RegisterAdminDTO, User>();    
-               
+            CreateMap<CreateCategoryDTO, Category>();   
 
         }
     }
