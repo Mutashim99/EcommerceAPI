@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using EcommerceAPI.Constants;
 using EcommerceAPI.DTOs.OrderDTOs;
 using EcommerceAPI.Models;
 using EcommerceAPI.Services.Email;
@@ -154,7 +155,7 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
                 AddressId = finalAddressId,
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = totalAmount,
-                OrderStatus = "Pending",
+                OrderStatus = OrderStatuses.Pending,
                 PaymentMethod = request.PaymentMethod,
              
             };
@@ -215,7 +216,7 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
                     Data = "The Order that you are trying to delete does not exist"
                 };
             }
-            if (string.Equals(CurrentOrder.OrderStatus, "Processing", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(CurrentOrder.OrderStatus, OrderStatuses.Processing, StringComparison.OrdinalIgnoreCase))
             {
                 return new ServiceResponse<string>
                 {
@@ -225,9 +226,9 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
                 };
             }
 
-            if (string.Equals(CurrentOrder.OrderStatus, "Cancelled", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(CurrentOrder.OrderStatus, "Delivered", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(CurrentOrder.OrderStatus, "Completed", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(CurrentOrder.OrderStatus, OrderStatuses.Shipped, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(CurrentOrder.OrderStatus, OrderStatuses.Delivered, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(CurrentOrder.OrderStatus, OrderStatuses.Cancelled, StringComparison.OrdinalIgnoreCase))
             {
                 return new ServiceResponse<string>
                 {

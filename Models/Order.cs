@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EcommerceAPI.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace EcommerceAPI.Models
 {
@@ -9,7 +10,7 @@ namespace EcommerceAPI.Models
 
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
-        public string OrderStatus { get; set; } = "Pending";
+        public string OrderStatus { get; set; } = OrderStatuses.Pending;
 
         public decimal TotalAmount { get; set; }
 
