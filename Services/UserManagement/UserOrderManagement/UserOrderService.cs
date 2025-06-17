@@ -102,13 +102,25 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
             };
         }
 
-        //
+        //user has to pay at the time of checkout if they select Online Transfer method 
+        //then and only they can place order and then admin can confirm the payment and 
+        //then they can set the status to pending or processing
         public async Task<ServiceResponse<int>> PlaceOrderAsync(int userId, CreateOrderDTO request)
         {
             if (request.SelectedCartItemIds == null || !request.SelectedCartItemIds.Any())
             {
                 return new ServiceResponse<int> { Success = false, Message = "No cart items selected." };
             }
+
+            if (request.PaymentMethod.ToLower() == "online transfer" && string.IsNullOrEmpty(request.OnlinePaymentProofImageURL))
+            {
+                return new ServiceResponse<int>
+                {
+                    Success = false,
+                    Message = "Payment proof is required for online payments."
+                };
+            }
+
 
             var cartItems = await db.CartItems
                 .Include(c => c.Product)
@@ -155,10 +167,15 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
                 AddressId = finalAddressId,
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = totalAmount,
-                OrderStatus = OrderStatuses.Pending,
+                OrderStatus = request.PaymentMethod.ToLower() == "Online Transfer" ? "PaymentProcessing" : "Pending", // Set order status based on payment method
+                                                                                                                      // If online payment, require screenshot and mark as PaymentProcessing
+                                                                                                                      // If cash on delivery, set status as Pending
+
                 PaymentMethod = request.PaymentMethod,
+                OnlinePaymentProofImageURL = request.OnlinePaymentProofImageURL
              
             };
+            
             var orderItems = mapper.Map<List<OrderItem>>(cartItems);
             order.OrderItems = orderItems;
 

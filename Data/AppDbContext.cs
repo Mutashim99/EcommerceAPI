@@ -19,7 +19,6 @@ namespace EcommerceAPI.Data
         public DbSet<Review> Reviews { get; set; }
         public DbSet<FavoriteItem> FavoriteItems { get; set; }
         public DbSet<ProductVariant> ProductVariants { get; set; }
-        public DbSet<PaymentVerification> PaymentVerifications { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Define decimal precision explicitly
