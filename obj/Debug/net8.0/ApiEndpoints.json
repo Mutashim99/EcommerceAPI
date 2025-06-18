@@ -129,6 +129,79 @@
     ]
   },
   {
+    "ContainingType": "EcommerceAPI.Controllers.AdminOrderController",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/AdminOrder",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminOrderController",
+    "Method": "GetOrderById",
+    "RelativePath": "api/AdminOrder/{orderId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminOrderController",
+    "Method": "UpdateOrderStatus",
+    "RelativePath": "api/AdminOrder/{orderId}/UpdateStatus",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "orderId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "EcommerceAPI.DTOs.AdminDTOs.UpdateOrderStatusRequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminOrderController",
+    "Method": "GetAllOrderStatuses",
+    "RelativePath": "api/AdminOrder/AllStatuses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminOrderController",
+    "Method": "GetOrdersByStatus",
+    "RelativePath": "api/AdminOrder/GetOrderByStatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "EcommerceAPI.Controllers.AdminRegisterController",
     "Method": "registerAdmin",
     "RelativePath": "api/AdminRegister/RegisterAdmin",

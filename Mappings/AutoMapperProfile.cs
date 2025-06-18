@@ -79,8 +79,16 @@ namespace EcommerceAPI.Mappings
 
 
             CreateMap<RegisterAdminDTO, User>();    
-            CreateMap<CreateCategoryDTO, Category>();   
+            CreateMap<CreateCategoryDTO, Category>();
 
+
+            CreateMap<Order, AdminOrderResponseDTO>()
+                .ForMember(dest => dest.User, opt => opt.MapFrom(src => src.User));
+
+            CreateMap<Order, AdminOrderDetailsResponseDTO>()
+                .ForMember(dest => dest.Address , opt => opt.MapFrom(src => src.Address))
+                .ForMember(dest => dest.User , opt => opt.MapFrom(src => src.User))
+                .ForMember(dest => dest.OrderItems , opt => opt.MapFrom(src => src.OrderItems));
         }
     }
 }
