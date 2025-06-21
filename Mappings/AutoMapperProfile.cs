@@ -94,6 +94,11 @@ namespace EcommerceAPI.Mappings
             CreateMap<Product, AdminProductDetailsResponseDTO>();
             CreateMap<Product, AdminProductListResponseDTO>();
             CreateMap<CreateProductVariant, ProductVariant>();
+
+            CreateMap<Review, AdminReviewResponseDTO>()
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.Username))
+                .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Product.Category.Name));
         }
     }
 }

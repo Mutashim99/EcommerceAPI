@@ -23,6 +23,7 @@ using BCrypt.Net;
 using EcommerceAPI.Services.AdminManagement.AdminCategory;
 using EcommerceAPI.Services.AdminManagement.AdminOrder;
 using EcommerceAPI.Services.AdminManagement.AdminProduct;
+using EcommerceAPI.Services.AdminManagement.AdminReview;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -93,6 +94,7 @@ builder.Services.AddScoped<IAdminAuth, AdminAuthService>();
 builder.Services.AddScoped<IAdminCategory, AdminCategoryService>();
 builder.Services.AddScoped<IAdminOrder, AdminOrderService>();
 builder.Services.AddScoped<IAdminProduct, AdminProductService>();
+builder.Services.AddScoped<IAdminReview, AdminReviewService>();
 builder.Services.AddAutoMapper(typeof(Program));
 
 
