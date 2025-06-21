@@ -202,6 +202,109 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "EcommerceAPI.Controllers.AdminProductController",
+    "Method": "GetProductById",
+    "RelativePath": "api/AdminProduct/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "EcommerceAPI.DTOs.AdminDTOs.AdminProductDetailsResponseDTO",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminProductController",
+    "Method": "GetAllProducts",
+    "RelativePath": "api/AdminProduct/all",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[EcommerceAPI.DTOs.AdminDTOs.AdminProductListResponseDTO, EcommerceAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminProductController",
+    "Method": "CreateProduct",
+    "RelativePath": "api/AdminProduct/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "EcommerceAPI.DTOs.AdminDTOs.CreateProductDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminProductController",
+    "Method": "UpdateProduct",
+    "RelativePath": "api/AdminProduct/update/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "EcommerceAPI.DTOs.AdminDTOs.CreateProductDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "EcommerceAPI.Controllers.AdminRegisterController",
     "Method": "registerAdmin",
     "RelativePath": "api/AdminRegister/RegisterAdmin",
