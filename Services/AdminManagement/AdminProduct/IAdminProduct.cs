@@ -8,7 +8,8 @@ namespace EcommerceAPI.Services.AdminManagement.AdminProduct
         Task<ServiceResponse<List<AdminProductListResponseDTO>>> GetAllProductsAsync();
         Task<ServiceResponse<AdminProductDetailsResponseDTO>> GetProductByIdAsync(int productId);
         Task<ServiceResponse<string>> UpdateProductAsync(int productId,CreateProductDTO updateProductDTO);
-
+        Task<ServiceResponse<string>> DeActiveProductAsync(int productId);
+        public Task<ServiceResponse<string>> ActiveProductAsync(int productId);
 
     }
 }

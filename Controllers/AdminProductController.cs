@@ -57,5 +57,24 @@ namespace EcommerceAPI.Controllers
 
             return Ok(result.Data);
         }
+
+        [HttpPut("DeactiveProduct/{ProductId}")]
+        public async Task<IActionResult> DeactiveProductAsync(int ProductId)
+        {
+            var result = await adminProduct.DeActiveProductAsync(ProductId);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Data);
+        }
+        [HttpPut("ActiveProduct/{ProductId}")]
+        public async Task<IActionResult> ActiveProductAsync(int ProductId)
+        {
+            var result = await adminProduct.ActiveProductAsync(ProductId);
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            return Ok(result.Data);
+        }
     }
 }

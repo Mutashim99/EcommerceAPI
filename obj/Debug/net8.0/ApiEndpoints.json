@@ -229,6 +229,22 @@
   },
   {
     "ContainingType": "EcommerceAPI.Controllers.AdminProductController",
+    "Method": "ActiveProductAsync",
+    "RelativePath": "api/AdminProduct/ActiveProduct/{ProductId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminProductController",
     "Method": "GetAllProducts",
     "RelativePath": "api/AdminProduct/all",
     "HttpMethod": "GET",
@@ -272,6 +288,22 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "EcommerceAPI.Controllers.AdminProductController",
+    "Method": "DeactiveProductAsync",
+    "RelativePath": "api/AdminProduct/DeactiveProduct/{ProductId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ProductId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "EcommerceAPI.Controllers.AdminProductController",

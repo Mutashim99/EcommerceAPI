@@ -28,7 +28,7 @@ namespace EcommerceAPI.Services.AdminManagement.AdminProduct
                 };
             }
 
-
+ 
             var mappedIntoProduct = mapper.Map<EcommerceAPI.Models.Product>(createProduct);
             await db.Products.AddAsync(mappedIntoProduct);
             await db.SaveChangesAsync();
@@ -108,5 +108,49 @@ namespace EcommerceAPI.Services.AdminManagement.AdminProduct
             };
 
         }
+
+        public async Task<ServiceResponse<string>> DeActiveProductAsync(int productId)
+        {
+            var productFromDB = await db.Products.FindAsync(productId);
+            if (productFromDB == null)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Message = "Cant find any product with given id",
+                    Success = false
+                };
+            }
+            productFromDB.IsActive = false;
+            await db.SaveChangesAsync();
+            return new ServiceResponse<string>
+            {
+                Message = "Product Deactivated successfully",
+                Data = "Product Deactivated successfully",
+                Success = true
+            };
+        }
+        public async Task<ServiceResponse<string>> ActiveProductAsync(int productId)
+        {
+            var productFromDB = await db.Products.FindAsync(productId);
+            if (productFromDB == null)
+            {
+                return new ServiceResponse<string>
+                {
+                    Data = null,
+                    Message = "Cant find any product with given id",
+                    Success = false
+                };
+            }
+            productFromDB.IsActive = true;
+            await db.SaveChangesAsync();
+            return new ServiceResponse<string>
+            {
+                Message = "Product activated successfully",
+                Data = "Product activated successfully",
+                Success = true
+            };
+        }
+
     }
 }
