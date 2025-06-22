@@ -1,100 +1,291 @@
-# 🛒 ASP.NET Core eCommerce Backend API
+# 🛒 ASP.NET Core E-Commerce Backend API
 
-A complete, eCommerce backend built with **ASP.NET Core Web API** and **Entity Framework Core**, supporting all essential operations of a modern eCommerce platform.
+A **production-ready e-commerce REST API** built using **ASP.NET Core Web API 8** and **Entity Framework Core**. This backend powers a full shopping experience with user authentication, product catalog, cart, orders, payments, admin controls, and more.
 
 ---
 
-## 🚀 Features
+## 🚀 Live API
 
-### 👤 User Management
-- JWT Authentication & Authorization
-- Role-based access (Admin, Customer)
-- Register, Login, Profile Update
-- Password Change & Forgot/Reset Password (via Email)
-- Soft Delete / Deactivate Account
-
-### 🛍️ Product Management
-- CRUD for Products
-- Product Variants (Size, Color, Price, Stock)
-- Product Categories
-- Product Reviews
-- Product Images (coming soon)
-
-### 📦 Order & Cart
-- Add to Cart
-- Update & Remove Cart Items
-- Place Orders from Cart
-- Track Orders
-- Order History for Users
-- Admin View of All Orders
-
-### 💖 Wishlist / Favorites
-- Add or Remove Products from Wishlist
-
-### 📧 Email Services
-- Send verification, reset password, and notification emails
-
-### 🛠 Admin Features
-- View all users
-- Assign roles
-- Manage product catalog
-- View all orders
+Coming soon (planned to deploy on Azure).
 
 ---
 
 ## 🧰 Tech Stack
 
-- **.NET 8** (ASP.NET Core Web API)
-- **Entity Framework Core**
+- **ASP.NET Core 8 (Web API)**
+- **Entity Framework Core 8**
 - **SQL Server**
-- **JWT** for Authentication
-- **MailKit** for Email Services
-- **Swagger** for API testing
-- **AutoMapper** 
-- **FluentValidation**
+- **AutoMapper**
+- **JWT Authentication**
+- **Gmail SMTP (for email services)**
+- **Swagger** – API documentation
 
 ---
 
-## ⚙️ Getting Started
+## 📁 Folder Structure
 
-### 1. Clone the repository
+- `Controllers/` – API controllers by feature
+- `Models/` – Entity models
+- `DTOs/` – Request and response data models
+- `Services/` – Business logic for each module
+- `Mappings/` – AutoMapper configuration
+- `Constants/` – All the constants like order status etc goes here.
+- `Data/` – ApplicationDbContext & migrations
+
+---
+
+## 🔐 Authentication & Authorization
+
+- **JWT-based Auth**
+- Role-based system with 3 roles:
+  - `User`
+  - `Admin`
+  - `SuperAdmin` (seeded user)
+- Secure password hashing and email verification
+
+---
+
+## ✅ Features
+
+### 👤 User Module
+
+- Signup, Login, JWT Token generation
+- Change password, forgot/reset password
+- Update username & phone number
+- Get user profile
+
+### 📦 Product Module
+
+- Browse all products, categories, brands
+- Product details with variants (color/size)
+- Related products & new arrivals
+- Add/remove favorites
+
+### 🛍 Cart & Checkout
+
+- Add/update/remove items from cart
+- Clear cart
+- Partial cart checkout
+- Checkout preview endpoint
+- Place order with optional proof image
+
+### 📬 Address Management
+
+- Add, update, delete addresses
+- Set default address
+
+### 📦 Order Management
+
+- View all orders
+- View order details
+- Cancel orders
+
+### 📝 Review System
+
+- Leave reviews only for purchased products
+- View all personal reviews
+- Edit/delete reviews
+
+### 🔧 Admin Panel
+
+- Manage categories, products, orders, and reviews
+- Toggle product active/inactive
+- Filter orders by status
+- Create other admins (only SuperAdmin)
+
+---
+
+## 🌐 API Endpoints
+
+### 🔐 Auth
+
+- `POST /api/Auth/Signup`
+- `POST /api/Auth/Login`
+- `POST /api/Auth/VerifyEmail`
+
+### 👤 User Profile
+
+- `GET /api/UserProfile/GetUserProfile`
+- `POST /api/UserProfile/UpdateUsername`
+- `POST /api/UserProfile/UpdatePhoneNumber`
+- `POST /api/UserProfile/ChangePassword`
+- `POST /api/UserProfile/ForgotPassword`
+- `POST /api/UserProfile/ResetPassword`
+
+### 🛍 User Cart
+
+- `GET /api/UserCart/GetCartItems`
+- `POST /api/UserCart/AddCartItem`
+- `PUT /api/UserCart/UpdateCartItemQuantity`
+- `DELETE /api/UserCart/RemoveCartItem/{cartItemId}`
+- `DELETE /api/UserCart/ClearCart`
+
+### 💖 User Favorite
+
+- `GET /api/UserFavorite`
+- `POST /api/UserFavorite/AddtoFavorite/{ProductId}`
+- `DELETE /api/UserFavorite/RemoveFavorite/{ProductId}`
+
+### 📬 User Address
+
+- `GET /api/UserAddress/GetAddresses`
+- `POST /api/UserAddress/AddAddress`
+- `PUT /api/UserAddress/UpdateAddress/{AddressId}`
+- `DELETE /api/UserAddress/DeleteAddress/{AddressId}`
+
+### 📦 User Orders
+
+- `GET /api/UserOrder/MyOrders`
+- `GET /api/UserOrder/OrderDetails/{orderId}`
+- `POST /api/UserOrder/CheckoutPreview`
+- `POST /api/UserOrder/PlaceOrder`
+- `PUT /api/UserOrder/cancel/{orderId}`
+
+### 📝 User Reviews
+
+- `GET /api/UserReview/GetMyReviews`
+- `GET /api/UserReview/GetMyReviewForProduct/{productId}`
+- `POST /api/UserReview/AddReview`
+- `PUT /api/UserReview/UpadateReview/{reviewId}`
+- `DELETE /api/UserReview/DeleteReview/{reviewId}`
+- `GET /api/UserReview/GetReviewableProducts`
+
+### 🛒 Product
+
+- `GET /api/Product/AllProducts`
+- `GET /api/Product/NewArrivals`
+- `GET /api/Product/{productId}`
+- `GET /api/Product/Category/{categoryName}`
+- `GET /api/Product/Brand/{brandName}`
+- `GET /api/Product/{productId}/Related`
+- `GET /api/Product/GetCategories`
+
+---
+
+### 🛠 Admin Product
+
+- `POST /api/AdminProduct/create`
+- `GET /api/AdminProduct/all`
+- `GET /api/AdminProduct/{id}`
+- `PUT /api/AdminProduct/update/{id}`
+- `PUT /api/AdminProduct/DeactiveProduct/{ProductId}`
+- `PUT /api/AdminProduct/ActiveProduct/{ProductId}`
+
+### 🗂 Admin Category
+
+- `POST /api/AdminCategory/CreateCategory`
+- `DELETE /api/AdminCategory/DeleteCategory/{id}`
+- `GET /api/AdminCategory/GetAllCategories`
+- `GET /api/AdminCategory/GetCategoryById/{id}`
+- `PUT /api/AdminCategory/UpdateCategory/{id}`
+
+### 🧾 Admin Order
+
+- `GET /api/AdminOrder`
+- `GET /api/AdminOrder/GetOrderByStatus`
+- `GET /api/AdminOrder/{orderId}`
+- `PUT /api/AdminOrder/{orderId}/UpdateStatus`
+- `GET /api/AdminOrder/AllStatuses`
+
+### 👮‍♂️ Admin Review
+
+- `GET /api/AdminReview/GetAllReviews`
+- `GET /api/AdminReview/FilterByProduct/{productId}`
+- `DELETE /api/AdminReview/DeleteReview/{id}`
+
+### 👤 Admin Registration
+
+- `POST /api/AdminRegister/RegisterAdmin`
+
+---
+
+
+## 🔐 Security
+
+- All endpoints use [Authorize] with policy/role-based checks
+- Passwords are securely hashed
+- JWT tokens expire in 1 hour
+- Email-based verification for password reset
+- Admin-only endpoints protected with `Role = Admin/SuperAdmin`
+
+---
+
+## ⚙ Setup Instructions
+
+### 🧰 Prerequisites
+
+- .NET 8 SDK
+- SQL Server / LocalDB
+
+### 🛠️ Setup
+
 ```bash
-git clone https://github.com/Mutashim99/EcommerceAPI.git
-cd ecommerce-api
+git clone https://github.com/Mutashim99/EcommerceAPI
+cd ecommerce-backend
 ```
-### 2. Configure your DB and Email
-- Update appsettings.json:
-```bash
-"ConnectionStrings": {
-  "DefaultConnection": "Your SQL Server connection string"
-},
-"Jwt": {
-  "Key": "Your_Secret_Key",
-  "Issuer": "your-app",
-  "Audience: "your audience"
-},
-"EmailSettings": {
-  "SmtpServer": "smtp.yourdomain.com",
-  "Port": 587,
-  "SenderEmail": "your-email@domain.com",
-  "SenderName" : "Your Name",
-  "Password": "your-email-password"
+
+1. Add `appsettings.json` with:
+
+```json
+  {
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultString": "Your Connection String"
+  },
+  "JwtSettings": {
+    "Key": "Your Key", 
+    "Issuer": "Your Issuer",
+    "Audience": "Your Audience"
+  },
+  "EmailSettings": {
+    "SmtpServer": "smtp.gmail.com",
+    "Port": "587",
+    "SenderEmail": "Your sender Email",
+    "SenderName": "Your Sender Name",
+    "Password": "Your Gmail APP Password"
+  },
+  "FrontendDomainForEmailVerification": "Your Front end Domain to send in the emails with links"
 }
+
 ```
 
-### 3. Run Migrations & Database Update
+2. Run the migration:
+
 ```bash
-dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
 
-### 4. Run the API
-
-- Run the application using the .NET CLI:
+3. Start the API:
 
 ```bash
 dotnet run
 ```
 
-### 🤝 Contributing
-- Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+4. Open Swagger:
+
+```
+https://localhost:<port>/swagger
+```
+
+---
+
+## 🙋 Author
+
+Built by **Mutashim Mohsin**\
+Open for internship & collaboration opportunities!
+
+🔗 GitHub: https://github.com/Mutashim99\
+📧 Email: muhtashimmohsin@outlook.com
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
