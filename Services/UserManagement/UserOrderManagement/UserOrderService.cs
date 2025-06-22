@@ -167,7 +167,7 @@ namespace EcommerceAPI.Services.UserManagement.UserOrderManagement
                 AddressId = finalAddressId,
                 OrderDate = DateTime.UtcNow,
                 TotalAmount = totalAmount,
-                OrderStatus = request.PaymentMethod.ToLower() == "Online Transfer" ? "PaymentProcessing" : "Pending", // Set order status based on payment method
+                OrderStatus = request.PaymentMethod == "Online Transfer" ? "PaymentProcessing" : "Pending", // Set order status based on payment method
                                                                                                                       // If online payment, require screenshot and mark as PaymentProcessing
                                                                                                                       // If cash on delivery, set status as Pending
 

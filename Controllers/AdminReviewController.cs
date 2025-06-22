@@ -17,7 +17,7 @@ namespace EcommerceAPI.Controllers
             _adminReviewService = adminReviewService;
         }
 
-        // GET: api/AdminReview
+      
         [HttpGet("GetAllReviews")]
         public async Task<ActionResult<List<AdminReviewResponseDTO>>> GetAllReviews()
         {
@@ -28,7 +28,7 @@ namespace EcommerceAPI.Controllers
             return Ok(result.Data);
         }
 
-        // GET: api/AdminReview/filter-by-product/5
+        
         [HttpGet("FilterByProduct/{productId}")]
         public async Task<ActionResult<List<AdminReviewResponseDTO>>> FilterByProduct(int productId)
         {
@@ -39,7 +39,7 @@ namespace EcommerceAPI.Controllers
             return Ok(result.Data);
         }
 
-        // DELETE: api/AdminReview/5
+      
         [HttpDelete("DeleteReview/{id}")]
         public async Task<ActionResult<string>> DeleteReview(int id)
         {
