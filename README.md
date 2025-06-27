@@ -6,7 +6,7 @@ A **production-ready e-commerce REST API** built using **ASP.NET Core Web API 8*
 
 ## 🚀 Live API
 
-Coming soon (planned to deploy on Azure).
+- **Swagger UI Link :** https://storegrid-api.azurewebsites.net/swagger/index.html
 
 ---
 
