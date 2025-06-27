@@ -105,16 +105,19 @@ Console.WriteLine(hashedPassword);
 
 var app = builder.Build();
 
+app.MapGet("/", () => "StoreGrid API is running successfully on Azure!");
 
 
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "StoreGrid API V1");
+    c.RoutePrefix = "swagger";
+});
+
 
 app.UseHttpsRedirection();
 app.UseAuthentication(); 
